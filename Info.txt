@@ -1,0 +1,85 @@
+
+TODO:
+ Impor SMS to SIM card
+ Deleting SMS from SIM card (With overwriting, for security)
+ Export SMS to phone`s memory
+ GUI
+
+-------------------------------------------------------------------------------
+https://stackoverflow.com/questions/25541791/how-to-add-sms-into-sim-memory-in-android
+
+
+
+To retrieve the IMSI (subscriber ID in the SIM), Use the getSubscriberId method in the TelephonyManager API.
+
+
+++++++++++++++++++-------------
+Android support DUAL-SIM/MULTIPLE SIM cards in API since ANDROID 5.1.
+
+https://developer.android.com/about/versions/android-5.1.html#multisim
+ 
+-------------------------------
+
+adb logcat
+
+then make a messaging app to show all sim card messages:
+
+02-24 21:46:45.781  1288  2013 I ActivityManager: START u0 {cmp=com.android.mms/.ui.ManageSimMessages (has extras)} from uid 10026 on display 0
+02-24 21:46:45.857 14948 14948 D ManageSimMessages: updateSimState sim count is 1
+02-24 21:46:45.864 14948 14948 D ManageSimMessages: updateFragments add sim0 fragment
+02-24 21:46:45.867 14948 14948 D ManageSimMessages: update sim info for slotId 0
+02-24 21:46:45.867 14948 14948 D ManageSimMessages: set selected is slotId 0
+02-24 21:46:45.893  2418  2436 D IccSmsInterfaceManager: [IccSmsInterfaceManager] getAllMessagesFromEF     // public List<SmsRawData> IccSmsInterfaceManager::getAllMessagesFromIccEf()
+02-24 21:46:45.945  1288  1391 I ActivityManager: Displayed com.android.mms/.ui.ManageSimMessages: +122ms
+02-24 21:46:46.111  1288  1391 I Timeline: Timeline: Activity_windows_visible id: ActivityRecord{d6e16fb u0 com.android.mms/.ui.ManageSimMessages t97} time:10645399
+
+https://android.googlesource.com/platform/frameworks/opt/telephony/+/tools_r22/src/java/com/android/internal/telephony/IccSmsInterfaceManager.java       // getAllMessagesFromIccEf
+-----------------------------------------------------
+https://android.googlesource.com/platform/packages/providers/TelephonyProvider/+/refs/heads/master/src/com/android/providers/telephony/SmsProvider.java  // getAllMessagesFromIcc
+-------------------------------------------------
+Investigate: https://developer.android.com/distribute/best-practices/develop/restrictions-non-sdk-interfaces
+             https://android-developers.googleblog.com/2018/02/improving-stability-by-reducing-usage.html
+             
+Starting in Android 9 (API level 28), the platform restricts which non-SDK interfaces your app can use. 
+These restrictions apply whenever an app references a non-SDK interface or attempts to obtain its handle using reflection or JNI.
+
+Look for i.e. "Accessing hidden field Landroid/os/Message;->flags:I (light greylist, JNI)" in adb logcat
+-------------------------------------------------
+getContext().getClassLoader().loadClass("android.telephony.SmsManager").getMethod("getDefault", new Class[0]).invoke(null, new Object[0]);
+
+https://stackoverflow.com/questions/37344360/how-to-get-smsmanager-object-of-selected-sim-card-using-java-reflection
+-------------------------------------------------------
+com.android.internal.telephony
+UiccSmsController.java       // class UiccSmsController extends ISms.Stub
+
+            method = Class.forName("com.android.internal.telephony.ISms$Stub").getDeclaredMethod("asInterface", IBinder.class);
+            getIccSmsInterfaceManager(subId)
+
+
+        IccSmsInterfaceManager iccSmsIntMgr = getIccSmsInterfaceManager(subId);
+        if (iccSmsIntMgr != null) {
+            return iccSmsIntMgr.getAllMessagesFromIccEf(callingPackage);
+        } else {
+            Rlog.e(LOG_TAG,"getAllMessagesFromIccEf iccSmsIntMgr is" +
+                          " null for Subscription: " + subId);
+            return null;
+        }
+
+--------------------------------------------------
+    public static ArrayList<SmsMessage> getAllMessagesFromIcc() {
+        List<SmsRawData> records = null;
+        try {
+            ISms iccISms = ISms.Stub.asInterface(ServiceManager.getService("isms"));
+            if (iccISms != null) {
+                records = iccISms.getAllMessagesFromIccEf(ActivityThread.currentPackageName());
+            }
+        } catch (RemoteException ex) {
+            // ignore it
+        }
+        return createMessageListFromRawRecords(records);
+    }
+==============================================================================================
+"ISms.Stub" is a interface for ServiceManager.getService("isms") whoever is registered it (IccSmsInterfaceManagerProxy.java(old) or UiccSmsController.java(new))
+
+
+*/

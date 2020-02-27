@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "SimSmsExporter", "SimSmsExporter.androidproj", "{48EBABF5-53E8-459D-A232-F55639C8704A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B790AEE-C5E9-4626-8030-D02C30645866}"
+	ProjectSection(SolutionItems) = preProject
+		Info.txt = Info.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM.Build.0 = Debug|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM64.Build.0 = Debug|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x64.ActiveCfg = Debug|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x64.Build.0 = Debug|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x64.Deploy.0 = Debug|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x86.ActiveCfg = Debug|x86
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x86.Build.0 = Debug|x86
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Debug|x86.Deploy.0 = Debug|x86
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM.ActiveCfg = Release|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM.Build.0 = Release|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM.Deploy.0 = Release|ARM
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM64.ActiveCfg = Release|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM64.Build.0 = Release|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|ARM64.Deploy.0 = Release|ARM64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x64.ActiveCfg = Release|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x64.Build.0 = Release|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x64.Deploy.0 = Release|x64
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x86.ActiveCfg = Release|x86
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x86.Build.0 = Release|x86
+		{48EBABF5-53E8-459D-A232-F55639C8704A}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57EAD9C8-304C-4448-BADE-347CE607DC40}
+	EndGlobalSection
+EndGlobal
